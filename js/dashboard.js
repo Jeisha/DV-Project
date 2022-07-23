@@ -1040,20 +1040,7 @@ function updateBar(data, total, state){
 }
 
 function reset(){
-
-    var chor = document.getElementById("choroplethChart");
-    var pie = document.getElementById("pieChart");
-    var scatter = document.getElementById("scatterChart");
-    var death = document.getElementById("lineChartDeath");
-    var vaccine = document.getElementById("lineChartVaccine");
-    chor.innerHTML = '';
-    pie.innerHTML = '';
-    scatter.innerHTML = '';
-    death.innerHTML = '';
-    vaccine.innerHTML = '';
-    create()
-
-
+    location.reload()
 }
 function updateText(state){
     arrayTitle =['Selangor','W.P Kuala Lumpur','Johor','Sabah','Sarawak','Negeri Sembilan','Penang','Kelantan','Perak','Kedah','Melaka','Pahang','Terengganu','W.P Putrajaya','Perlis'] 
