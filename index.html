@@ -16,21 +16,30 @@
     <div id="MainViz" class="mainViz" width="100%">
         <div width=screen.width id="p1">
             <button class="button button1" id="buttonReset" onclick="reset();">Reset</button>
-            <svg id="choroplethChart" width="49%" height="400" class="centerGraphs" style="background-color:#2f82a8c9;"></svg>
+            <p></p>
+            <svg id="choroplethChart" width="100%" height="400" class="centerGraphs"></svg>
         </div>
         <div width=100% id="p2">
             <div width=50%>
-                <svg id="pieChart" height="500" class="Left" width="49%" style="background-color: white;"></svg>
+                <p></p>
+                <svg id="pieChart" height="500" class="Left" width="50%" style="background-color: white;"></svg>
             </div>
             <div width=50%>
+                <p></p>
                 <svg id="scatterChart" height="500" class="Right" width="49%" style="background-color: white;"></svg>
             </div>
         </div>
-        
+        <p></p>
         <svg id="lineChartDeath" width="49%" height="500" style="background-color: white;" class="Right"></svg>
+        <p></p>
         <svg id="lineChartVaccine" width="49%" height="500" style="background-color: white;" class="Left"></svg> 
     </div>
+    <div><h1 id="title"></h1>
+        <h4 id="discussion">
+        </h4>
+    </div>
     <script type="text/javascript" src="js/dashboard.js"></script>
+
 </body>
 
 </html>
