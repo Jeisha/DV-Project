@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+        
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="css/index.css" />
+    </head>
+<body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Dashboard</a>
+        <a href="aboutus.html">About Us</a>
+      </div>
+      
+      <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+        <div style="padding: 10px;"></div>
+        <button class="button button1" id="buttonReset" style="font-size:30px;cursor:pointer" onclick="reset();">Reset</button>
+        <div id="MainViz" class="mainViz" width="100%">
+            <div width=80% id="p1">
+                <svg id="choroplethChart" width="55%" height="400" class="left"></svg>
+                <svg id="pieChart" height="500" class="Left" width="40%" ></svg>
+            </div>
+            <div width=100% id="p2">
+                <svg id="scatterChart" height="500" class="Right" width="30%"></svg>
+                <svg id="lineChartDeath" width="30%" height="500"  class="Right"></svg>
+                <svg id="lineChartVaccine" width="30%" height="500" class="Left"></svg> 
+            </div>
+        </div>
+        <div>
+            <h1 id="title"></h1>
+            <h4 id="discussion"></h4>
+        </div>
+      </div>
+      <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="js/dashboard.js"></script>
+</body>
+</html>

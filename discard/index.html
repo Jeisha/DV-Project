@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <div id="MainViz" class="mainViz" width="100%">
+        <div width=screen.width id="p1">
+            <button class="button button1" id="buttonReset" onclick="reset();">Reset</button>
+            <p></p>
+            <svg id="choroplethChart" width="100%" height="400" class="left"></svg>
+            <div width=50%>
+                <p></p>
+                <svg id="pieChart" height="500" class="Left" width="50%" \></svg>
+            </div>
+        </div>
+        <div width=100% id="p2">
+            <div width=50%>
+                <p></p>
+                <svg id="scatterChart" height="500" class="Right" width="49%"></svg>
+            </div>
+        </div>
+        <p></p>
+        <svg id="lineChartDeath" width="49%" height="500"  class="Right"></svg>
+        <p></p>
+        <svg id="lineChartVaccine" width="49%" height="500" class="Left"></svg> 
+    </div>
+    <div><h1 id="title"></h1>
+        <h4 id="discussion">
+        </h4>
+    </div>
+    <script type="text/javascript" src="js/dashboard.js"></script>
+
+</body>
+
+</html>
