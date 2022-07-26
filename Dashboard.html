@@ -1,99 +1,82 @@
-<!DOCTYPE html>
-<html style="font-size: 16px;" lang="en"><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="Dashboard.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
-    <script src="https://d3js.org/d3.v5.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-    <script type="text/javascript" src="dashboard.js"></script>
-    <meta name="generator" content="Nicepage 4.14.1, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": ""
-}</script>
-    <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Dashboard">
-    <meta property="og:type" content="website">
-  </head>
-  <body class="u-body u-xl-mode" data-lang="en">
-    <header class="u-clearfix u-header u-header" id="sec-1364">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
-          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
-            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
-              <svg class="u-svg-link" viewBox="0 0 24 24">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
-              </svg>
-              <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <rect y="1" width="16" height="2"></rect>
-                  <rect y="7" width="16" height="2"></rect>
-                </g>
-              </svg>
-            </a>
-          </div>
-          <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1">
-              <li class="u-nav-item">
-                <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="Dashboard.html" style="padding: 10px 20px;">Dashboard</a>
-              </li>
-              <li class="u-nav-item">
-                <a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="About-Us.html" style="padding: 10px 20px;">About Us</a>
-              </li>
-            </ul>
-          </div>
-          <div class="u-custom-menu u-nav-container-collapse">
-            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-              <div class="u-inner-container-layout u-sidenav-overflow">
-                <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                  <li class="u-nav-item">
-                    <a class="u-button-style u-nav-link" href="Dashboard.html">Dashboard</a>
-                  </li>
-                  <li class="u-nav-item">
-                    <a class="u-button-style u-nav-link" href="About-Us.html">About Us</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-          </div>
-        </nav>
-      </div></header>
-    
-    <section class="u-clearfix u-section-1" id="sec-5689">
-      <button id="buttonReset" style="font-size:30px;cursor:pointer" onclick="reset();">Reset</button>
-        <div id="MainViz" class="mainViz" width="100%">
-            <div width=80% id="p1">
-                <svg id="choroplethChart" width="55%" height="400" class="left"></svg>
-                <svg id="pieChart" height="500" class="Left" width="40%" ></svg>
-            </div>
-            <div width=100% id="p2">
-                <svg id="scatterChart" height="500" class="Right" width="30%"></svg>
-                <svg id="lineChartDeath" width="30%" height="500"  class="Right"></svg>
-                <svg id="lineChartVaccine" width="30%" height="500" class="Left"></svg> 
-            </div>
-        </div>
-        <div>
-          <h1 id="title">Insights</h1>
-          <h4 id="discussion">In the dashboard, there are 4 graphs that shows the data which we will be discussing in this part.For vaccine x death overall scatter plot, we can see that there are a cluster of dots on the left side of the graph.The plot also shows the increasing pattern. Since vaccine is given, we can see the death is much lesser than before.Increment of death would be cause by the mutation of the virus which using greek alphabet. 2nd graph which is vaccine type distribution which shows on the type of vaccine and amount of it distributed. We can see that Pfizer have the highest distribution among other different vaccine. However for Sinopharm is very low which is 43,803 doses was distributed. Next, Overalls Death Line Chart which shows amount of deceased over a duration. We can see the line chart peak at 9,669 during September 2021. At this time, SARS-CoV-2 Variants which is Alpha, Beta, Gamma and Delta have peak and causes many infected people to face fatality.Next, Overall vaccine line chart show on how many vaccine was distribued over a specific duration.It peak on August 2021 which have total vaccine of 14,434,117. In July 2022, the vaccine distributed is 206,072.In this time, the booster was distributed.</h4>
-        </div>
-    </section>
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-2c33"><div class="u-clearfix u-sheet u-sheet-1">
-    </section>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard</title>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<script src="js/dashboard.js"></script>
+<link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: rgb(105, 85, 85);">
+<div class="container">
+  <header>
+    <div class="primary_header">
+      <h1 class="title">DATA VISUALIZATION</h1>
+    </div>
+    <nav class="secondary_header" id="menu">
+		<div class="row">
+      <div class="columnNav">
+				<a href="dashboard.html" class="selected">Dashboard</a>
 
+      </div>
+      <div class="columnNav">
+				<a href="aboutus.html">About Us</a>
+
+      </div>
+		</div>
+    </nav>
+  </header>
+  <section>
+  <div class="row" id="mainviz">
+    <h1 class="columnTitle titles" style="padding-bottom: 0px;">Malaysian choropleth Map</h1>
+    <h1 class="columnTitle titles" style="padding-bottom: 0px;">Vaccine Type Bar Chart</h1>
+    <div class="columnTitle" style="padding-top: 0px;">
+      <svg id="choroplethChart" height="500" width="1000"></svg>
+    </div>
+    <div class="columnNav" style="padding-top: 0px;">
+      <svg id="pieChart" height="500" width="1000"></svg>
+    </div>
+  </div>
+  <div class="row">
+    <h1 class="column3ChartTitle titles" >Death Line Chart</h1>
+    <h1 class="column3ChartTitle titles" >Vaccine Line Chart</h1>
+    <h1 class="column3ChartTitle titles" >Vaccine x Death Scatter Plot</h1>
+    <div class="column3Chart">
+      <svg id="lineChartDeath" height="500" width="750" style="padding: 10px;"></svg>
+    </div>
+    <div class="column3Chart">
+      <svg id="lineChartVaccine" height="500" width="750" style="padding: 10px;"></svg>
+    </div>
+    <div class="column3Chart">
+      <svg id="scatterChart" height="500" width="750" style="padding: 10px; padding-right:20px"></svg>
+    </div>
+    <p class="floatRight">Author: Shahim, Faris, Akil. || Data Source: <a class="normalText" href="https://www.moh.gov.my" target="_blank" >MOH</a>.</p>
+  </div>
+  <hr>
   
-</body></html>
+  <div class="row"></div>
+  <div class="row">
+    <div class="columnTitle" style="width: 100%; margin: auto; display: flex;">
+      <h1 id="insightTitle" class="insightText">Insights</h1>
+    </div>
+    <div class="row"></div>
+    <br>
+    <div class="columnTitle" style="width: 100%; margin: auto; display: flex;">
+      <div style="width: 80%; margin: auto; display: flex;">
+      <h3 id="insightDisc" class="discText">In the dashboard, there are 4 graphs that shows the data which we will be discussing in this part.For vaccine x death overall scatter plot, we can see that there are a cluster of dots on the left side of the graph.The plot also shows the increasing pattern. Since vaccine is given, we can see the death is much lesser than before.Increment of death would be cause by the mutation of the virus which using greek alphabet. 2nd graph which is vaccine type distribution which shows on the type of vaccine and amount of it distributed. We can see that Pfizer have the highest distribution among other different vaccine. However for Sinopharm is very low which is 43,803 doses was distributed. Next, Overalls Death Line Chart which shows amount of deceased over a duration. We can see the line chart peak at 9,669 during September 2021. At this time, SARS-CoV-2 Variants which is Alpha, Beta, Gamma and Delta have peak and causes many infected people to face fatality.Next, Overall vaccine line chart show on how many vaccine was distribued over a specific duration.It peak on August 2021 which have total vaccine of 14,434,117. In July 2022, the vaccine distributed is 206,072.In this time, the booster was distributed.</h3></div>
+    </div>
+  </div>
+  <div class="row"></div>
+      
+  </section>
+  <footer class="secondary_header footer">
+    <div class="copyright">&copy;2022 - <strong>Data Visualization Presentation</strong></div>
+  </footer>
+</div>
+</body>
+</html>

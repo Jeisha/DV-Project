@@ -1,0 +1,105 @@
+
+		.columnNav {
+      float: left;
+      width: 50%;
+      text-align: center
+      }
+
+  .columnTitle {
+      float: left;
+      width: 48%;
+      text-align: center
+  }
+  
+  .column3Chart {
+      float: left;
+      width: 33%;
+      text-align: center
+  }
+
+  .column3ChartTitle {
+      float: left;
+      width: 32%;
+      text-align: center
+  }
+      
+  a {
+    text-decoration: none;
+    font-size: 25px;
+  }
+  a:visited {
+    color: black;
+  }
+a:hover, a:active {
+    color: blue;
+  }
+  a.selected {
+    color: blue;
+  }
+  
+  .titles {
+    font-size: 30px;
+    text-align: center;
+    text-anchor: middle;
+    border-style: groove;
+    border-radius: 25px;
+    background-color: aquamarine;
+  }
+
+  .floatRight{
+    float: right;
+  }
+
+  .normalText {
+    font-size: 15px;
+
+  }
+
+  .discText{
+    margin: auto; 
+    display: flex; 
+    text-align: justify;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .insightText{
+    margin: auto; 
+    display: flex;
+    padding: 20px;
+    border-style: outset;
+    border-radius: 20px;
+    font-size: 40px;
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .profpicture2 {
+    border-style: groove;
+    width: 48%;
+    float: left;
+    text-align: center
+  }
+
+  .profpicture3 {
+    border-style: groove;
+    width: 32%;
+    float: left;
+    text-align: center
+  }
+
+  .profpicTitle {
+    margin: auto; 
+    display: flex;
+    padding: 20px;
+    border-style: outset;
+    border-radius: 20px;
+    font-size: 40px;
+    background-color: antiquewhite;
+    font-family: 'Courier New', Courier, monospace;
+  }
