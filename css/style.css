@@ -1,26 +1,28 @@
 
-		.columnNav {
-      float: left;
-      width: 50%;
-      text-align: center
-      }
+  .columnNav {
+    float: left;
+    width: 48.75%;
+    text-align: center;
+  }
 
   .columnTitle {
       float: left;
-      width: 48%;
-      text-align: center
+      width: 48.75%;
+      text-align: center;
+      background-color: white;
   }
   
   .column3Chart {
       float: left;
-      width: 33%;
-      text-align: center
+      width: 32.5%;
+      text-align: center;
+      background-color: white;
   }
 
   .column3ChartTitle {
       float: left;
-      width: 32%;
-      text-align: center
+      width: 32.5%;
+      text-align: center;
   }
       
   a {
@@ -43,7 +45,8 @@ a:hover, a:active {
     text-anchor: middle;
     border-style: groove;
     border-radius: 25px;
-    background-color: aquamarine;
+    background-color: rgb(0, 0, 116);
+    color: white;
   }
 
   .floatRight{
@@ -66,6 +69,7 @@ a:hover, a:active {
     line-height: 1.5;
     letter-spacing: 1px;
     font-family: 'Courier New', Courier, monospace;
+    background-color: white;
   }
 
   .insightText{
@@ -75,7 +79,8 @@ a:hover, a:active {
     border-style: outset;
     border-radius: 20px;
     font-size: 40px;
-    background-color: antiquewhite;
+    background-color: rgb(0, 0, 116);
+    color: white;
     font-family: 'Courier New', Courier, monospace;
   }
 
@@ -102,4 +107,10 @@ a:hover, a:active {
     font-size: 40px;
     background-color: antiquewhite;
     font-family: 'Courier New', Courier, monospace;
+  }
+
+  table {
+    padding: 10px;
+    padding-left: 30px;
+    width: 100%;
   }

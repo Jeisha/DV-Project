@@ -114,7 +114,6 @@ function createChoropleth(topo) {
     var svg = d3.select("#choroplethChart"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
-        console.log(width)
     var projection = d3.geoMercator()
         .scale(2200) // adjust size map
         .center([110, 4])
@@ -258,7 +257,7 @@ function createLineDeath() {
 
     let y = d3.scaleLinear()
         .domain([0, maxY + 1000])
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleTime()
         .domain(domain)
@@ -342,7 +341,7 @@ function updateLineDeath(lineData, country, color){
 
     let y = d3.scaleLinear()
         .domain([minY, maxY + 10])
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleTime()
         .domain(domain)
@@ -393,7 +392,7 @@ function createLineVaccine() {
 
     let y = d3.scaleLinear()
         .domain([minY - 1000, maxY + 100000])
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleTime()
         .domain(domain)
@@ -477,7 +476,7 @@ function updateLineVaccine(lineData, country, color){
 
     let y = d3.scaleLinear()
         .domain([minY, maxY + 100000])
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleTime()
         .domain(domain)
@@ -521,7 +520,7 @@ function createScatter(){
 
     let y = d3.scaleLinear()
         .domain(yDomain)
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleLinear()
         .domain(xDomain)
@@ -595,7 +594,7 @@ function updateScatter(scattterData, country, color){
 
     let y = d3.scaleLinear()
         .domain(yDomain)
-        .range([(height * 0.8), 25]);
+        .range([(height * 0.8), 0]);
 
     let x = d3.scaleLinear()
         .domain(xDomain)
@@ -848,7 +847,7 @@ function createBar(data, total){
     
     yDomain = d3.extent(data.map(function(d) { return d.value; }))
     var y = d3.scaleLinear()
-        .range([height*0.8, 25])
+        .range([height*0.8, 0])
         .domain([yDomain[0]-10000, yDomain[1]+10000000])
     
     chartGroup.append("g")
@@ -958,7 +957,7 @@ function updateBar(data, total, state){
     yDomain = d3.extent(data.map(function(d) { return d.value; }))
     var y = d3.scaleLinear()
         .domain([yDomain[0]-10000, yDomain[1]+1000000])
-        .range([height*0.8, 25])
+        .range([height*0.8, 0])
     
     
     let yAxis = d3.axisLeft(y).ticks(7);

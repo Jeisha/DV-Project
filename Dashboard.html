@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background-color: rgb(105, 85, 85);">
-<div class="container">
+<div class="container" style="background-color: grey;">
   <header>
     <div class="primary_header">
       <h1 class="title">DATA VISUALIZATION</h1>
@@ -32,41 +32,40 @@
     </nav>
   </header>
   <section>
-  <div class="row" id="mainviz">
-    <h1 class="columnTitle titles" style="padding-bottom: 0px;">Malaysian choropleth Map</h1>
-    <h1 class="columnTitle titles" style="padding-bottom: 0px;">Vaccine Type Bar Chart</h1>
-    <div class="columnTitle" style="padding-top: 0px;">
-      <svg id="choroplethChart" height="500" width="1000"></svg>
-    </div>
-    <div class="columnNav" style="padding-top: 0px;">
-      <svg id="pieChart" height="500" width="1000"></svg>
-    </div>
-  </div>
-  <div class="row">
-    <h1 class="column3ChartTitle titles" >Death Line Chart</h1>
-    <h1 class="column3ChartTitle titles" >Vaccine Line Chart</h1>
-    <h1 class="column3ChartTitle titles" >Vaccine x Death Scatter Plot</h1>
-    <div class="column3Chart">
-      <svg id="lineChartDeath" height="500" width="750" style="padding: 10px;"></svg>
-    </div>
-    <div class="column3Chart">
-      <svg id="lineChartVaccine" height="500" width="750" style="padding: 10px;"></svg>
-    </div>
-    <div class="column3Chart">
-      <svg id="scatterChart" height="500" width="750" style="padding: 10px; padding-right:20px"></svg>
-    </div>
-    <p class="floatRight">Author: Shahim, Faris, Akil. || Data Source: <a class="normalText" href="https://www.moh.gov.my" target="_blank" >MOH</a>.</p>
-  </div>
+  <table>
+    <tr>
+      <th class="columnTitle titles">Map of Malaysia</th>
+      <th class="columnTitle titles">Vaccination Type Breakdown</th>
+    </tr>
+    <tr>
+      <td class="columnTitle"> <svg id="choroplethChart" height="500" width="1000"></svg></td>
+      <td class="columnTitle"> <svg id="pieChart" height="500" width="1000"></svg></td>
+    </tr>
+  </table>
+  
+  <table>
+    <tr>
+      <th class="column3ChartTitle titles">Daily New Death Report</th>
+      <th class="column3ChartTitle titles">Daily Vaccination Report</th>
+      <th class="column3ChartTitle titles">Correlation Between Death and Vaccination</th>
+    </tr>
+    <tr>
+      <td class="column3Chart" style="border-style: groove;"> <svg id="lineChartDeath" height="500" width="500" ></svg></td>
+      <td class="column3Chart" style="border-style: groove;"> <svg id="lineChartVaccine" height="500" width="500"></svg></td>
+      <td class="column3Chart" style="border-style: groove;"> <svg id="scatterChart" height="500" width="500" ></svg></td>
+    </tr>
+  </table>
+  <p style="text-align:center">Author: Shahim, Faris, Akil. || Data Source: <a class="normalText" href="https://www.moh.gov.my" target="_blank" >MOH</a>.</p>
   <hr>
   
   <div class="row"></div>
   <div class="row">
-    <div class="columnTitle" style="width: 100%; margin: auto; display: flex;">
+    <div style="width: 100%; margin: auto; display: flex;">
       <h1 id="insightTitle" class="insightText">Insights</h1>
     </div>
     <div class="row"></div>
     <br>
-    <div class="columnTitle" style="width: 100%; margin: auto; display: flex;">
+    <div style="width: 100%; margin: auto; display: flex;">
       <div style="width: 80%; margin: auto; display: flex;">
       <h3 id="insightDisc" class="discText">In the dashboard, there are 4 graphs that shows the data which we will be discussing in this part.For vaccine x death overall scatter plot, we can see that there are a cluster of dots on the left side of the graph.The plot also shows the increasing pattern. Since vaccine is given, we can see the death is much lesser than before.Increment of death would be cause by the mutation of the virus which using greek alphabet. 2nd graph which is vaccine type distribution which shows on the type of vaccine and amount of it distributed. We can see that Pfizer have the highest distribution among other different vaccine. However for Sinopharm is very low which is 43,803 doses was distributed. Next, Overalls Death Line Chart which shows amount of deceased over a duration. We can see the line chart peak at 9,669 during September 2021. At this time, SARS-CoV-2 Variants which is Alpha, Beta, Gamma and Delta have peak and causes many infected people to face fatality.Next, Overall vaccine line chart show on how many vaccine was distribued over a specific duration.It peak on August 2021 which have total vaccine of 14,434,117. In July 2022, the vaccine distributed is 206,072.In this time, the booster was distributed.</h3></div>
     </div>
