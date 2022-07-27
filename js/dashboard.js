@@ -261,7 +261,7 @@ function createLineDeath() {
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -271,7 +271,7 @@ function createLineDeath() {
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(0,50)');
+        .attr('transform', 'translate(50,50)');
 
     var lineDeath = d3.line()
         .x(function(d) { return x(d.Date); })
@@ -345,7 +345,7 @@ function updateLineDeath(lineData, country, color){
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -396,7 +396,7 @@ function createLineVaccine() {
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -406,7 +406,7 @@ function createLineVaccine() {
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(0,50)');
+        .attr('transform', 'translate(50,50)');
 
     var lineVacc = d3.line()
         .x(function(d) { return x(d.Date); })
@@ -480,7 +480,7 @@ function updateLineVaccine(lineData, country, color){
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -524,7 +524,7 @@ function createScatter(){
 
     let x = d3.scaleLinear()
         .domain(xDomain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
     
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5);
@@ -534,7 +534,7 @@ function createScatter(){
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(0,50)');
+        .attr('transform', 'translate(50,50)');
 
     chartGroup.append('g').attr('class', 'x axis').attr('transform', 'translate(20,'+height*0.8+')').call(xAxis);
     chartGroup.append('g').attr('class', 'y axis').attr('transform', 'translate(20,0)').call(yAxis);
@@ -598,7 +598,7 @@ function updateScatter(scattterData, country, color){
 
     let x = d3.scaleLinear()
         .domain(xDomain)
-        .range([0, (width *0.9)]);
+        .range([0, (width *0.8)]);
     
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5);
@@ -829,7 +829,7 @@ function updatePie(data,total){
 function createBar(data, total){
 
     const svg = d3.select('#pieChart'),
-    width = svg.attr('width'),
+    width = +svg.attr('width'),
     height = +svg.attr('height');
 
     
@@ -838,7 +838,7 @@ function createBar(data, total){
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(0,50)');
+        .attr('transform', 'translate(50,50)');
 
     var x = d3.scaleBand()
         .range([0,width*0.8])
