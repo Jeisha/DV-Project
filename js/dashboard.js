@@ -553,16 +553,21 @@ function createScatter(){
     var svg = d3.select("#scatterChart"),
         width = svg.attr("width"),
         height = +svg.attr("height");
-    
+    var newd = []
     tempCumDeath = 0
     tempCumVac = 0
     for ( i in lineAllData){
-        tempCumDeath  = tempCumDeath + Number(d.Death)
-        tempCumVac  = tempCumVac + Number(d.Vaccine)
+        tempCumDeath  = tempCumDeath + Number(lineAllData[i].Death)
+        tempCumVac  = tempCumVac + Number(lineAllData[i].Vaccine)
+        newd.push({
+            date:lineAllData[i].Date,
+            Death:tempCumDeath,
+            Vaccine:tempCumVac
+        })
     }
     
-    var yDomain = d3.extent(lineAllData, function(d) { return +d.Vaccine});
-    var xDomain = d3.extent(lineAllData, function(d) { return +d.Death});
+    var yDomain = d3.extent(newd, function(d) { return +d.Vaccine});
+    var xDomain = d3.extent(newd, function(d) { return +d.Death});
 
     let y = d3.scaleLinear()
         .domain(yDomain)
@@ -588,7 +593,7 @@ function createScatter(){
     chartGroup.append('g')
         .attr('id', 'dotsRel')
         .selectAll("dot")
-        .data(lineAllData)
+        .data(newd)
         .enter()
         .append("circle")
         .attr("cx", function(d) { return x(+d.Death); })
@@ -650,10 +655,24 @@ function createScatter(){
             .style('pointer-events', 'none');
     }
 }
-function updateScatter(scattterData, country, color){
+function updateScatter(data, country, color){
     var svg = d3.select("#scatterChart"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
+
+    var scattterData = []
+    tempCumDeath = 0
+    tempCumVac = 0
+    for ( i in data){
+        tempCumDeath  = tempCumDeath + Number(data[i].Death)
+        tempCumVac  = tempCumVac + Number(data[i].Vaccine)
+        scattterData.push({
+            date:data[i].Date,
+            Death:tempCumDeath,
+            Vaccine:tempCumVac
+        })
+    }
+
     
     var yDomain = d3.extent(scattterData, function(d) { return +d.Vaccine});
     var xDomain = d3.extent(scattterData, function(d) { return +d.Death});
