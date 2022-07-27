@@ -189,7 +189,6 @@ function createChoropleth(topo) {
         updateLineVaccine(lineData,d.properties.name,colorScale(d.total))
         updateScatter(lineData,d.properties.name,colorScale(d.total))
         updateText(d.properties.name)
-        console.log(d);
 
         pieData = []
         barData = []
@@ -296,6 +295,26 @@ function createLineDeath() {
         .style("fill", "black")
         .on("mouseover", mouseOverDeath)
         .on("mouseleave", mouseLeave);
+    
+    
+    var legend = svg.append("g")
+        .attr("id", "legend");
+    
+    legend.append('text')
+        .text('Monthly Cases')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width/1.8)
+        .attr('y',height*0.99)
+        .attr('text-anchor', 'middle')
+    
+    legend.append('text')
+        .text('Death Count')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width*0.15)
+        .attr('y',height*0.07)
+        .attr('text-anchor', 'middle')
 
     var tooltip = d3.select("body")
         .append("div")
@@ -432,6 +451,26 @@ function createLineVaccine() {
         .on("mouseover", mouseOverVacc)
         .on("mouseleave", mouseLeave);
     
+    var legend = svg.append("g")
+        .attr("id", "legend");
+    
+    legend.append('text')
+        .text('Monthly Basis')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width/1.8)
+        .attr('y',height*0.99)
+        .attr('text-anchor', 'middle')
+    
+    legend.append('text')
+        .text('Vaccine Dose')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width*0.15)
+        .attr('y',height*0.07)
+        .attr('text-anchor', 'middle')
+
+    
     var tooltip = d3.select("body")
         .append("div")
         .attr('id', 'tipLine')
@@ -515,6 +554,13 @@ function createScatter(){
         width = svg.attr("width"),
         height = +svg.attr("height");
     
+    tempCumDeath = 0
+    tempCumVac = 0
+    for ( i in lineAllData){
+        tempCumDeath  = tempCumDeath + Number(d.Death)
+        tempCumVac  = tempCumVac + Number(d.Vaccine)
+    }
+    
     var yDomain = d3.extent(lineAllData, function(d) { return +d.Vaccine});
     var xDomain = d3.extent(lineAllData, function(d) { return +d.Death});
 
@@ -552,6 +598,26 @@ function createScatter(){
         .style("fill", "black")
         .on("mouseover", mouseOver)
         .on("mouseleave", mouseLeave);
+    
+    
+    var legend = svg.append("g")
+        .attr("id", "legend");
+    
+    legend.append('text')
+        .text('Death Count')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width/2.1)
+        .attr('y',height*0.99)
+        .attr('text-anchor', 'middle')
+    
+    legend.append('text')
+        .text('Vaccine Dose')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width*0.15)
+        .attr('y',height*0.07)
+        .attr('text-anchor', 'middle')
 
     var tooltip = d3.select("body")
         .append("div")
@@ -895,6 +961,22 @@ function createBar(data, total){
         .style("font-size","24px")
         .attr('x',width/2)
         .attr('y',height*0.15)
+        .attr('text-anchor', 'middle')
+    
+    legend.append('text')
+        .text('Vaccine Type')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width/2.1)
+        .attr('y',height*0.99)
+        .attr('text-anchor', 'middle')
+    
+    legend.append('text')
+        .text('Vaccine Dose')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width*0.07)
+        .attr('y',height*0.07)
         .attr('text-anchor', 'middle')
 
     var tooltip = d3.select("body")
