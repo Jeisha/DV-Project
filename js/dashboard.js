@@ -261,7 +261,7 @@ function createLineDeath() {
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width * 0.8)]);
+        .range([0, (width *0.9)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -271,7 +271,7 @@ function createLineDeath() {
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(50,50)');
+        .attr('transform', 'translate(0,50)');
 
     var lineDeath = d3.line()
         .x(function(d) { return x(d.Date); })
@@ -345,7 +345,7 @@ function updateLineDeath(lineData, country, color){
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width * 0.8)]);
+        .range([0, (width *0.9)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -396,7 +396,7 @@ function createLineVaccine() {
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width * 0.8)]);
+        .range([0, (width *0.9)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -406,7 +406,7 @@ function createLineVaccine() {
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(50,50)');
+        .attr('transform', 'translate(0,50)');
 
     var lineVacc = d3.line()
         .x(function(d) { return x(d.Date); })
@@ -480,7 +480,7 @@ function updateLineVaccine(lineData, country, color){
 
     let x = d3.scaleTime()
         .domain(domain)
-        .range([0, (width * 0.8)]);
+        .range([0, (width *0.9)]);
 
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5).tickFormat(formatDate);
@@ -524,7 +524,7 @@ function createScatter(){
 
     let x = d3.scaleLinear()
         .domain(xDomain)
-        .range([0, (width *0.8)]);
+        .range([0, (width *0.9)]);
     
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5);
@@ -534,7 +534,7 @@ function createScatter(){
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(50,50)');
+        .attr('transform', 'translate(0,50)');
 
     chartGroup.append('g').attr('class', 'x axis').attr('transform', 'translate(20,'+height*0.8+')').call(xAxis);
     chartGroup.append('g').attr('class', 'y axis').attr('transform', 'translate(20,0)').call(yAxis);
@@ -571,7 +571,7 @@ function createScatter(){
             .duration(10)
             .style("opacity", 1);
         tooltip
-            .html("Vaccinated: " + d.Vaccine.toLocaleString() + "<br>Death: " + d.Death.toLocaleString())
+            .html("Vaccinated: " + Number(d.Vaccine).toLocaleString() + "<br>Death: " + d.Death.toLocaleString())
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 90) + "px")
     }
@@ -598,7 +598,7 @@ function updateScatter(scattterData, country, color){
 
     let x = d3.scaleLinear()
         .domain(xDomain)
-        .range([0, (width * 0.8)]);
+        .range([0, (width *0.9)]);
     
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5);
@@ -838,7 +838,7 @@ function createBar(data, total){
         .attr('width', width);
 
     var chartGroup = svg.append('g')
-        .attr('transform', 'translate(50,50)');
+        .attr('transform', 'translate(0,50)');
 
     var x = d3.scaleBand()
         .range([0,width*0.8])
@@ -858,6 +858,7 @@ function createBar(data, total){
         .style("text-anchor", "middle")
         .style("font-size", "large")
         .on("mouseover", mouseOverText)
+        .on('mousemove',mouseMoveText)
         .on("mouseleave", mouseLeave);
     
     chartGroup.append("g")
@@ -869,11 +870,12 @@ function createBar(data, total){
         .data(data)
         .enter()
         .append("rect")
-        .attr("x", function(d) { return x(d.name); })
+        .attr("x", function(d) { return x(d.name) + 20; })
         .attr("width", x.bandwidth())
         .attr("fill", function(d) {return vacColor(d.name)})
         .attr("y", function(d) { return y(0); })
         .on("mouseover", mouseOverBar)
+        .on('mousemove',mouseMoveBar)
         .on("mouseleave", mouseLeave)
     
     chartGroup.selectAll("rect")
@@ -912,25 +914,31 @@ function createBar(data, total){
             .transition()
             .duration(100)
             .style("opacity", 1);
+    }
+
+    function mouseMoveBar(d){
         tooltip
             .html(Number(d.value).toLocaleString() + " Doses")
             .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 90) + "px")
+            .style("top", (d3.event.pageY - 25) + "px")
     }
 
     function mouseOverText(d) {
+        tooltip
+            .transition()
+            .duration(100)
+            .style("opacity", 1);
+    }
+
+    function mouseMoveText(d){
         temp = []
         for (i in data){
             if (data[i].name == d) temp = data[i].value;
         }
         tooltip
-            .transition()
-            .duration(100)
-            .style("opacity", 1);
-        tooltip
             .html(Number(temp).toLocaleString() + " Doses")
             .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 90) + "px")
+            .style("top", (d3.event.pageY - 25) + "px")
     }
 
     function mouseLeave(d) {

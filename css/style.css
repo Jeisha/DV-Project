@@ -1,7 +1,7 @@
 
   .columnNav {
     float: left;
-    width: 48.75%;
+    width: 33.33%;
     text-align: center;
   }
 
@@ -86,16 +86,20 @@ a:hover, a:active {
 
   .profpicture2 {
     border-style: groove;
-    width: 48%;
+    width: 20%;
     float: left;
-    text-align: center
+    text-align: center;
+    background-color:  rgb(255, 246, 246);;
+    color: black;
   }
 
   .profpicture3 {
     border-style: groove;
-    width: 32%;
+    width: 20%;
     float: left;
-    text-align: center
+    text-align: center;
+    background-color:  rgb(255, 246, 246);;
+    color: black;
   }
 
   .profpicTitle {
@@ -105,7 +109,7 @@ a:hover, a:active {
     border-style: outset;
     border-radius: 20px;
     font-size: 40px;
-    background-color: antiquewhite;
+    background-color:blue;
     font-family: 'Courier New', Courier, monospace;
   }
 
@@ -113,4 +117,32 @@ a:hover, a:active {
     padding: 10px;
     padding-left: 30px;
     width: 100%;
+  }
+  
+  .center {
+    margin: auto;
+    display: flex;
+  }
+
+  .objContainer{
+    border-style: groove;
+    text-align: center;
+    background-color:  white;
+    width: 80%; 
+    margin: auto; 
+    display: block;
+    border-style: solid;
+    border-radius: 5px;
+  }
+
+  .objText{
+    color: black;
+    font-size: 25px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+    padding: 15px;
+    font-weight: bold;
+    padding-bottom: 0px;
   }

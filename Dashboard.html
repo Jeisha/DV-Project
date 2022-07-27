@@ -12,21 +12,22 @@
 <link href="css/multiColumnTemplate.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background-color: rgb(105, 85, 85);">
-<div class="container" style="background-color: grey;">
+<body style="background-color: rgb(56, 49, 49);">
+<div class="container" style="background-color: rgb(255, 246, 246);">
   <header>
-    <div class="primary_header">
+    <div class="primary_header" style="background-color: rgb(0, 0, 116)">
       <h1 class="title">DATA VISUALIZATION</h1>
     </div>
     <nav class="secondary_header" id="menu">
 		<div class="row">
       <div class="columnNav">
 				<a href="dashboard.html" class="selected">Dashboard</a>
-
       </div>
       <div class="columnNav">
-				<a href="aboutus.html">About Us</a>
-
+				<a href="aboutproject.html">About Project</a>
+      </div>
+      <div class="columnNav">
+				<a href="aboutus.html">Team Members</a>
       </div>
 		</div>
     </nav>
@@ -38,8 +39,8 @@
       <th class="columnTitle titles">Vaccination Type Breakdown</th>
     </tr>
     <tr>
-      <td class="columnTitle"> <svg id="choroplethChart" height="500" width="1000"></svg></td>
-      <td class="columnTitle"> <svg id="pieChart" height="500" width="1000"></svg></td>
+      <td class="columnTitle" style="border-style: groove;"> <svg id="choroplethChart" height="500" width="1000"></svg></td>
+      <td class="columnTitle" style="border-style: groove;"> <svg id="pieChart" height="500" width="1000"></svg></td>
     </tr>
   </table>
   
@@ -55,7 +56,8 @@
       <td class="column3Chart" style="border-style: groove;"> <svg id="scatterChart" height="500" width="500" ></svg></td>
     </tr>
   </table>
-  <p style="text-align:center">Author: Shahim, Faris, Akil. || Data Source: <a class="normalText" href="https://www.moh.gov.my" target="_blank" >MOH</a>.</p>
+  <p style="text-align:center; color:white">Author: Shahim, Faris, Akil.</p>
+  <p style="text-align:center; color:white">Data Source: <a class="normalText" href="https://github.com/MoH-Malaysia/covid19-public" target="_blank"  style="color: white;">MOH</a>.</p>
   <hr>
   
   <div class="row"></div>
