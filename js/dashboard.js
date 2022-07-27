@@ -447,7 +447,7 @@ function createLineVaccine() {
         .attr("cy", function(d) { return y(+d.Vaccine); })
         .attr("r", 5)
         .attr('transform', 'translate(20,0)')
-        .style("fill", "blue")
+        .style("fill", "black")
         .on("mouseover", mouseOverVacc)
         .on("mouseleave", mouseLeave);
     
