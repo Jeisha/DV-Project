@@ -78,8 +78,7 @@ function create(){
         createChoropleth(loadData[0])
         createLineDeath()
         createLineVaccine()
-        createScatterDeath()
-        createScatterVaccine()
+        createScatter()
         pieData = []
         tempPieData = []
         totalSum = 0
@@ -448,7 +447,7 @@ function createLineVaccine() {
         .attr("cy", function(d) { return y(+d.Vaccine); })
         .attr("r", 5)
         .attr('transform', 'translate(20,0)')
-        .style("fill", "blue")
+        .style("fill", "black")
         .on("mouseover", mouseOverVacc)
         .on("mouseleave", mouseLeave);
     
@@ -550,168 +549,9 @@ function updateLineVaccine(lineData, country, color){
         .text(country +"'s Vaccine Line Chart")
 }
 
-function createScatterDeath(){
-    var svg = d3.select("#scatterDeathChart"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
-    var newd = []
-    tempCumDeath = 0
-    tempCumVac = 0
-    for ( i in lineAllData){
-        tempCumDeath  = tempCumDeath + Number(lineAllData[i].Death)
-        tempCumVac  = tempCumVac + Number(lineAllData[i].Vaccine)
-        newd.push({
-            Date:lineAllData[i].Date,
-            Death:tempCumDeath,
-            Vaccine:tempCumVac
-        })
-    }
-    
-    var yDomain = d3.extent(newd, function(d) { return +d.Death});
-    var xDomain = d3.extent(newd, function(d) { return d.Date});
-
-    let y = d3.scaleLinear()
-        .domain(yDomain)
-        .range([(height * 0.8), 0]);
-
-    let x = d3.scaleTime()
-        .domain(xDomain)
-        .range([0, (width *0.8)]);
-    
-    let yAxis = d3.axisLeft(y).ticks(7);
-    let xAxis = d3.axisBottom(x).ticks(5);
-
-    svg.append('svg')
-        .attr('height', height)
-        .attr('width', width);
-
-    var chartGroup = svg.append('g')
-        .attr('transform', 'translate(50,50)');
-
-    chartGroup.append('g').attr('class', 'x axis').attr('transform', 'translate(20,'+height*0.8+')').call(xAxis);
-    chartGroup.append('g').attr('class', 'y axis').attr('transform', 'translate(20,0)').call(yAxis);
-
-    chartGroup.append('g')
-        .attr('id', 'dotsRel')
-        .selectAll("dot")
-        .data(newd)
-        .enter()
-        .append("circle")
-        .attr("cx", function(d) { return x(d.Date); })
-        .attr("cy", function(d) { return y(+d.Death); })
-        .attr("r", 4)
-        .attr('transform', 'translate(20,0)')
-        .style("fill", "black")
-        .on("mouseover", mouseOver)
-        .on("mouseleave", mouseLeave);
-    
-    
-    var legend = svg.append("g")
-        .attr("id", "legend");
-    
-    legend.append('text')
-        .text('Monthly Basis')
-        .style("font-weight","500")
-        .style("font-size","24px")
-        .attr('x',width/2.1)
-        .attr('y',height*0.99)
-        .attr('text-anchor', 'middle')
-    
-    legend.append('text')
-        .text('Death Count')
-        .style("font-weight","500")
-        .style("font-size","24px")
-        .attr('x',width*0.08)
-        .attr('y',height*0.07)
-        .attr('text-anchor', 'middle')
-
-    var tooltip = d3.select("body")
-        .append("div")
-        .attr('id', 'tipLine')
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "white")
-        .style("border", "solid")
-        .style("border-width", "1px")
-        .style("border-radius", "5px")
-        .style("padding", "5px")
-        .style("position", "absolute")
-
-    function mouseOver(d) {
-        tooltip
-            .transition()
-            .duration(10)
-            .style("opacity", 1);
-        tooltip
-            .html("Vaccinated: " + Number(d.Vaccine).toLocaleString() + "<br>Death: " + d.Death.toLocaleString())
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 90) + "px")
-    }
-
-    function mouseLeave(d) {
-        tooltip
-            .transition()
-            .duration(100)
-            .style("opacity", 0)
-            .style('pointer-events', 'none');
-    }
-}
-function updateScatterDeath(data, country, color){
+function createScatter(){
     var svg = d3.select("#scatterChart"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
-
-    var scattterData = []
-    tempCumDeath = 0
-    tempCumVac = 0
-    for ( i in data){
-        tempCumDeath  = tempCumDeath + Number(data[i].Death)
-        tempCumVac  = tempCumVac + Number(data[i].Vaccine)
-        scattterData.push({
-            date:data[i].Date,
-            Death:tempCumDeath,
-            Vaccine:tempCumVac
-        })
-    }
-
-    
-    var yDomain = d3.extent(scattterData, function(d) { return +d.Vaccine});
-    var xDomain = d3.extent(scattterData, function(d) { return +d.Death});
-
-    let y = d3.scaleLinear()
-        .domain(yDomain)
-        .range([(height * 0.8), 0]);
-
-    let x = d3.scaleLinear()
-        .domain(xDomain)
-        .range([0, (width *0.8)]);
-    
-    let yAxis = d3.axisLeft(y).ticks(7);
-    let xAxis = d3.axisBottom(x).ticks(5);
-
-    var chartGroup = svg.select('g')
-
-    chartGroup.select('g.x.axis').call(xAxis);
-    chartGroup.select('g.y.axis').call(yAxis);
-
-    chartGroup.select('#dotsRel')
-        .selectAll("circle")
-        .data(scattterData)
-        .transition()
-        .duration(750)
-        .style("fill", color)
-        .attr("cx", function(d) { return x(+d.Death); })
-        .attr("cy", function(d) { return y(+d.Vaccine); });
-
-    var legend = svg.select("g#legend")
-    
-    legend.select("text")
-        .text('Vaccine x Death '+country+' Scatter Plot')
-}
-
-function createScatterVaccine(){
-    var svg = d3.select("#scatterVaccineChart"),
-        width = +svg.attr("width"),
+        width = svg.attr("width"),
         height = +svg.attr("height");
     var newd = []
     tempCumDeath = 0
@@ -720,23 +560,48 @@ function createScatterVaccine(){
         tempCumDeath  = tempCumDeath + Number(lineAllData[i].Death)
         tempCumVac  = tempCumVac + Number(lineAllData[i].Vaccine)
         newd.push({
-            Date:lineAllData[i].Date,
-            Death:tempCumDeath,
+            date:lineAllData[i].Date,
+            Death:Number(lineAllData[i].Death),
             Vaccine:tempCumVac
         })
     }
+    minmaxd = d3.extent(newd, function(d){return d.Death})
+    minmaxv = d3.extent(newd, function(d){return d.Vaccine})
 
-    var yDomain = d3.extent(newd, function(d) { return +d.Vaccine});
-    var xDomain = d3.extent(newd, function(d) { return d.Date});
+    dumd = []
+    for (i in newd){
+        dumd.push({
+            Date:lineAllData[i].Date,
+            Death:((Number(newd[i].Death) - minmaxd[0])/(minmaxd[1]-minmaxd[0]))*100,
+            Vaccine:((Number(newd[i].Vaccine) - minmaxv[0])/(minmaxv[1]-minmaxv[0]))*100
+        })
+    }
+    
+    var yDomain = d3.extent(dumd, function(d) { return +d.Vaccine});
+    var y2Domain = d3.extent(dumd, function(d) { return +d.Death});
+    var xDomain = d3.extent(dumd,function(d){return d.Date})
 
     let y = d3.scaleLinear()
         .domain(yDomain)
+        .range([(height * 0.8), 0]);
+    
+    let y2 = d3.scaleLinear()
+        .domain(y2Domain)
         .range([(height * 0.8), 0]);
 
     let x = d3.scaleTime()
         .domain(xDomain)
         .range([0, (width *0.8)]);
 
+    var lineVacc = d3.line()
+        .x(function(d) { return x(d.Date); })
+        .y(function(d) { return y(+d.Vaccine); })
+
+    var lineDeath = d3.line()
+        .x(function(d) { return x(d.Date); })
+        .y(function(d) { return y2(+d.Death); })
+
+    
     let yAxis = d3.axisLeft(y).ticks(7);
     let xAxis = d3.axisBottom(x).ticks(5);
 
@@ -749,38 +614,54 @@ function createScatterVaccine(){
 
     chartGroup.append('g').attr('class', 'x axis').attr('transform', 'translate(20,'+height*0.8+')').call(xAxis);
     chartGroup.append('g').attr('class', 'y axis').attr('transform', 'translate(20,0)').call(yAxis);
+    chartGroup.append('path').attr('d', lineVacc(dumd)).attr('id', 'lineVacc').attr('transform', 'translate(20,0)').style('fill','none').style('stroke','blue')
+    chartGroup.append('path').attr('d', lineDeath(dumd)).attr('id', 'lineDeath').attr('transform', 'translate(20,0)').style('fill','none').style('stroke','red')
 
     chartGroup.append('g')
-        .attr('id', 'dotsRel')
+        .attr('id', 'dotsVac')
         .selectAll("dot")
-        .data(newd)
+        .data(dumd)
         .enter()
         .append("circle")
         .attr("cx", function(d) { return x(d.Date); })
         .attr("cy", function(d) { return y(+d.Vaccine); })
         .attr("r", 4)
         .attr('transform', 'translate(20,0)')
-        .style("fill", "black")
+        .style("fill", "blue")
         .on("mouseover", mouseOver)
         .on("mouseleave", mouseLeave);
 
-
+    chartGroup.append('g')
+        .attr('id', 'dotsDea')
+        .selectAll("dot")
+        .data(dumd)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) { return x(d.Date); })
+        .attr("cy", function(d) { return y2(+d.Death); })
+        .attr("r", 4)
+        .attr('transform', 'translate(20,0)')
+        .style("fill", "red")
+        .on("mouseover", mouseOver)
+        .on("mouseleave", mouseLeave);
+    
+    
     var legend = svg.append("g")
         .attr("id", "legend");
-
+    
     legend.append('text')
-        .text('Monthly Basis')
+        .text('Date')
         .style("font-weight","500")
         .style("font-size","24px")
         .attr('x',width/2.1)
         .attr('y',height*0.99)
         .attr('text-anchor', 'middle')
-
+    
     legend.append('text')
-        .text('Death Count')
+        .text('Vaccine/Death Percentage')
         .style("font-weight","500")
-        .style("font-size","24px")
-        .attr('x',width*0.08)
+        .style("font-size","12px")
+        .attr('x',width*0.15)
         .attr('y',height*0.07)
         .attr('text-anchor', 'middle')
 
@@ -802,7 +683,7 @@ function createScatterVaccine(){
             .duration(10)
             .style("opacity", 1);
         tooltip
-            .html("Vaccinated: " + Number(d.Vaccine).toLocaleString() + "<br>Death: " + d.Death.toLocaleString())
+            .html("Vaccinated: " + Number(d.Vaccine).toFixed(2) + "%<br>Death: " + Number(d.Death).toFixed(2) + "%")
             .style("left", (d3.event.pageX) + "px")
             .style("top", (d3.event.pageY - 90) + "px")
     }
@@ -813,11 +694,88 @@ function createScatterVaccine(){
             .duration(100)
             .style("opacity", 0)
             .style('pointer-events', 'none');
+    }
 }
-}
+function updateScatter(data, country, color){
+    var svg = d3.select("#scatterChart"),
+        width = svg.attr("width"),
+        height = +svg.attr("height");
+    var newd = []
+    tempCumDeath = 0
+    tempCumVac = 0
+    for ( i in data){
+        tempCumDeath  = tempCumDeath + Number(data[i].Death)
+        tempCumVac  = tempCumVac + Number(data[i].Vaccine)
+        newd.push({
+            date:lineAllData[i].Date,
+            Death:Number(data[i].Death),
+            Vaccine:tempCumVac
+        })
+    }
+    minmaxd = d3.extent(newd, function(d){return d.Death})
+    minmaxv = d3.extent(newd, function(d){return d.Vaccine})
 
-function updateScatterVaccine(data, country, color){
+    dumd = []
+    for (i in newd){
+        dumd.push({
+            Date:lineAllData[i].Date,
+            Death:((Number(newd[i].Death) - minmaxd[0])/(minmaxd[1]-minmaxd[0]))*100,
+            Vaccine:((Number(newd[i].Vaccine) - minmaxv[0])/(minmaxv[1]-minmaxv[0]))*100
+        })
+    }
+    console.log(dumd)
+    
+    var yDomain = d3.extent(dumd, function(d) { return +d.Vaccine});
+    var y2Domain = d3.extent(dumd, function(d) { return +d.Death});
+    var xDomain = d3.extent(dumd,function(d){return d.Date})
 
+    let y = d3.scaleLinear()
+        .domain(yDomain)
+        .range([(height * 0.8), 0]);
+
+    let y2 = d3.scaleLinear()
+        .domain(y2Domain)
+        .range([(height * 0.8), 0]);
+
+    let x = d3.scaleTime()
+        .domain(xDomain)
+        .range([0, (width *0.8)]);
+    
+    let yAxis = d3.axisLeft(y).ticks(7);
+    let xAxis = d3.axisBottom(x).ticks(5);
+
+    var lineVacc = d3.line()
+        .x(function(d) { return x(d.Date); })
+        .y(function(d) { return y(+d.Vaccine); })
+
+    var lineDeath = d3.line()
+        .x(function(d) { return x(d.Date); })
+        .y(function(d) { return y(+d.Death); })
+
+    var chartGroup = svg.select('g')
+
+    chartGroup.select('g.x.axis').call(xAxis);
+    chartGroup.select('g.y.axis').call(yAxis);
+    chartGroup.select('#lineDeath').transition().duration(750).attr('d', lineDeath(dumd)).attr('fill', 'none')
+    chartGroup.select('#lineVacc').transition().duration(750).attr('d', lineVacc(dumd)).attr('fill', 'none')
+
+    chartGroup.select('#dotsVac')
+        .selectAll("circle")
+        .data(dumd)
+        .transition()
+        .duration(750)
+        .style("fill", color)
+        .attr("cx", function(d) { return x(d.Date); })
+        .attr("cy", function(d) { return y(+d.Vaccine); });
+        
+    chartGroup.select('#dotsDea')
+        .selectAll("circle")
+        .data(dumd)
+        .transition()
+        .duration(750)
+        .style("fill", color)
+        .attr("cx", function(d) { return x(d.Date); })
+        .attr("cy", function(d) { return y2(+d.Death); });
 }
 
 function createPie(data,total){

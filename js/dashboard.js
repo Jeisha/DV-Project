@@ -392,10 +392,7 @@ function updateLineDeath(lineData, country, color){
         .attr("cx", function(d) { return x(+d.Date); })
         .attr('transform', 'translate(20,0)');
     
-        var legend = svg.select("g#legend")
-
-        legend.select("text")
-            .text(country +"'s Death Line Chart")
+    document.getElementById('deaTitle').innerHTML = "Daily New Death Report in "+ country
 
 }
 
@@ -543,10 +540,7 @@ function updateLineVaccine(lineData, country, color){
         .attr("cy", function(d) { return y(+d.Vaccine); })
         .attr("cx", function(d) { return x(+d.Date); })
 
-    var legend = svg.select("g#legend")
-
-    legend.select("text")
-        .text(country +"'s Vaccine Line Chart")
+    document.getElementById('vacTitle').innerHTML = "Daily Vaccination Report in "+ country
 }
 
 function createScatter(){
@@ -565,7 +559,6 @@ function createScatter(){
             Vaccine:tempCumVac
         })
     }
-    console.log(newd)
     
     var yDomain = d3.extent(newd, function(d) { return +d.Vaccine});
     var xDomain = d3.extent(newd, function(d) { return +d.Death});
@@ -604,7 +597,6 @@ function createScatter(){
         .style("fill", "black")
         .on("mouseover", mouseOver)
         .on("mouseleave", mouseLeave);
-    
     
     var legend = svg.append("g")
         .attr("id", "legend");
@@ -702,11 +694,6 @@ function updateScatter(data, country, color){
         .style("fill", color)
         .attr("cx", function(d) { return x(+d.Death); })
         .attr("cy", function(d) { return y(+d.Vaccine); });
-
-    var legend = svg.select("g#legend")
-    
-    legend.select("text")
-        .text('Vaccine x Death '+country+' Scatter Plot')
 }
 
 function createPie(data,total){
@@ -1086,8 +1073,8 @@ function updateBar(data, total, state){
 
     var legend = svg.select("g#legend")
     
-    legend.select("text")
-        .text(state + "'s Vaccine Distribution")
+    
+    document.getElementById('typTitle').innerHTML = "Vaccination Type Breakdown in "+ state
     
     
     legend.select('#totalVac')
