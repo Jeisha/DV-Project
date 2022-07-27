@@ -78,7 +78,8 @@ function create(){
         createChoropleth(loadData[0])
         createLineDeath()
         createLineVaccine()
-        createScatter()
+        createScatterDeath()
+        createScatterVaccine()
         pieData = []
         tempPieData = []
         totalSum = 0
@@ -549,9 +550,9 @@ function updateLineVaccine(lineData, country, color){
         .text(country +"'s Vaccine Line Chart")
 }
 
-function createScatter(){
-    var svg = d3.select("#scatterChart"),
-        width = svg.attr("width"),
+function createScatterDeath(){
+    var svg = d3.select("#scatterDeathChart"),
+        width = +svg.attr("width"),
         height = +svg.attr("height");
     var newd = []
     tempCumDeath = 0
@@ -560,21 +561,20 @@ function createScatter(){
         tempCumDeath  = tempCumDeath + Number(lineAllData[i].Death)
         tempCumVac  = tempCumVac + Number(lineAllData[i].Vaccine)
         newd.push({
-            date:lineAllData[i].Date,
-            Death:Number(lineAllData[i].Death),
+            Date:lineAllData[i].Date,
+            Death:tempCumDeath,
             Vaccine:tempCumVac
         })
     }
-    console.log(newd)
     
-    var yDomain = d3.extent(newd, function(d) { return +d.Vaccine});
-    var xDomain = d3.extent(newd, function(d) { return +d.Death});
+    var yDomain = d3.extent(newd, function(d) { return +d.Death});
+    var xDomain = d3.extent(newd, function(d) { return d.Date});
 
     let y = d3.scaleLinear()
         .domain(yDomain)
         .range([(height * 0.8), 0]);
 
-    let x = d3.scaleLinear()
+    let x = d3.scaleTime()
         .domain(xDomain)
         .range([0, (width *0.8)]);
     
@@ -597,8 +597,8 @@ function createScatter(){
         .data(newd)
         .enter()
         .append("circle")
-        .attr("cx", function(d) { return x(+d.Death); })
-        .attr("cy", function(d) { return y(+d.Vaccine); })
+        .attr("cx", function(d) { return x(d.Date); })
+        .attr("cy", function(d) { return y(+d.Death); })
         .attr("r", 4)
         .attr('transform', 'translate(20,0)')
         .style("fill", "black")
@@ -610,7 +610,7 @@ function createScatter(){
         .attr("id", "legend");
     
     legend.append('text')
-        .text('Death Count')
+        .text('Monthly Basis')
         .style("font-weight","500")
         .style("font-size","24px")
         .attr('x',width/2.1)
@@ -618,10 +618,10 @@ function createScatter(){
         .attr('text-anchor', 'middle')
     
     legend.append('text')
-        .text('Vaccine Dose')
+        .text('Death Count')
         .style("font-weight","500")
         .style("font-size","24px")
-        .attr('x',width*0.15)
+        .attr('x',width*0.08)
         .attr('y',height*0.07)
         .attr('text-anchor', 'middle')
 
@@ -656,7 +656,7 @@ function createScatter(){
             .style('pointer-events', 'none');
     }
 }
-function updateScatter(data, country, color){
+function updateScatterDeath(data, country, color){
     var svg = d3.select("#scatterChart"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
@@ -707,6 +707,117 @@ function updateScatter(data, country, color){
     
     legend.select("text")
         .text('Vaccine x Death '+country+' Scatter Plot')
+}
+
+function createScatterVaccine(){
+    var svg = d3.select("#scatterVaccineChart"),
+        width = +svg.attr("width"),
+        height = +svg.attr("height");
+    var newd = []
+    tempCumDeath = 0
+    tempCumVac = 0
+    for ( i in lineAllData){
+        tempCumDeath  = tempCumDeath + Number(lineAllData[i].Death)
+        tempCumVac  = tempCumVac + Number(lineAllData[i].Vaccine)
+        newd.push({
+            Date:lineAllData[i].Date,
+            Death:tempCumDeath,
+            Vaccine:tempCumVac
+        })
+    }
+
+    var yDomain = d3.extent(newd, function(d) { return +d.Vaccine});
+    var xDomain = d3.extent(newd, function(d) { return d.Date});
+
+    let y = d3.scaleLinear()
+        .domain(yDomain)
+        .range([(height * 0.8), 0]);
+
+    let x = d3.scaleTime()
+        .domain(xDomain)
+        .range([0, (width *0.8)]);
+
+    let yAxis = d3.axisLeft(y).ticks(7);
+    let xAxis = d3.axisBottom(x).ticks(5);
+
+    svg.append('svg')
+        .attr('height', height)
+        .attr('width', width);
+
+    var chartGroup = svg.append('g')
+        .attr('transform', 'translate(50,50)');
+
+    chartGroup.append('g').attr('class', 'x axis').attr('transform', 'translate(20,'+height*0.8+')').call(xAxis);
+    chartGroup.append('g').attr('class', 'y axis').attr('transform', 'translate(20,0)').call(yAxis);
+
+    chartGroup.append('g')
+        .attr('id', 'dotsRel')
+        .selectAll("dot")
+        .data(newd)
+        .enter()
+        .append("circle")
+        .attr("cx", function(d) { return x(d.Date); })
+        .attr("cy", function(d) { return y(+d.Vaccine); })
+        .attr("r", 4)
+        .attr('transform', 'translate(20,0)')
+        .style("fill", "black")
+        .on("mouseover", mouseOver)
+        .on("mouseleave", mouseLeave);
+
+
+    var legend = svg.append("g")
+        .attr("id", "legend");
+
+    legend.append('text')
+        .text('Monthly Basis')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width/2.1)
+        .attr('y',height*0.99)
+        .attr('text-anchor', 'middle')
+
+    legend.append('text')
+        .text('Death Count')
+        .style("font-weight","500")
+        .style("font-size","24px")
+        .attr('x',width*0.08)
+        .attr('y',height*0.07)
+        .attr('text-anchor', 'middle')
+
+    var tooltip = d3.select("body")
+        .append("div")
+        .attr('id', 'tipLine')
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "white")
+        .style("border", "solid")
+        .style("border-width", "1px")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style("position", "absolute")
+
+    function mouseOver(d) {
+        tooltip
+            .transition()
+            .duration(10)
+            .style("opacity", 1);
+        tooltip
+            .html("Vaccinated: " + Number(d.Vaccine).toLocaleString() + "<br>Death: " + d.Death.toLocaleString())
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 90) + "px")
+    }
+
+    function mouseLeave(d) {
+        tooltip
+            .transition()
+            .duration(100)
+            .style("opacity", 0)
+            .style('pointer-events', 'none');
+}
+}
+
+function updateScatterVaccine(data, country, color){
+
 }
 
 function createPie(data,total){
