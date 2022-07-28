@@ -663,7 +663,7 @@ function updateScatter(data, country, color){
         tempCumVac  = tempCumVac + Number(data[i].Vaccine)
         scattterData.push({
             date:data[i].Date,
-            Death:tempCumDeath,
+            Death:Number(data[i].Death),
             Vaccine:tempCumVac
         })
     }
