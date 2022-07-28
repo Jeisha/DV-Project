@@ -430,6 +430,12 @@ body {
 	height: 300px;
 	margin-left: auto;
 }
+.thumbnailBig {
+	width: 900px;
+	border-radius: 0px;
+	height: 600px;
+	margin-left: auto;
+}
 .thumbnail_align {
 	text-align: center;
 }
