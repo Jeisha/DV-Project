@@ -5,9 +5,8 @@ var parseDate = d3.timeParse("%Y-%m");
 var formatDate = d3.timeFormat("%b %Y");
 var dates = []
 var datas = []
-const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#2E1217', '#A1433A', '#2C4A2C', '#FE5721','red']
 // const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#CDDC39', '#FFEB3C', '#FEC107', '#FE5721','red']
-// const colorRange = ["#440154","#481a6c","#472f7d","#414487","#39568c","#31688e","#2a788e","#23888e","#1f988b","#22a884","#35b779","#54c568","#7ad151","#a5db36","#a8db34","#d5e21a"]
+const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#2E1217', '#A1433A', '#2C4A2C', '#FE5721','red']
 // const colorRange = d3.schemeBlues(13)
 const stateCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 const vacCode = ['Pfizer','Sinovac','AstraZeneca','Sinopharm','CanSino']
@@ -664,7 +663,7 @@ function updateScatter(data, country, color){
         tempCumVac  = tempCumVac + Number(data[i].Vaccine)
         scattterData.push({
             date:data[i].Date,
-            Death: Number(data[i].Death),
+            Death:tempCumDeath,
             Vaccine:tempCumVac
         })
     }
@@ -933,7 +932,9 @@ function createBar(data, total){
         .selectAll("text")
         .style("text-anchor", "middle")
         .style("font-size", "large")
+        .data(data)
         .on("mouseover", mouseOverText)
+        .on('mousemove',mouseMoveText)
         .on("mouseleave", mouseLeave);
     
     chartGroup.append("g")
@@ -1021,6 +1022,14 @@ function createBar(data, total){
             .style("opacity", 1);
     }
 
+    function mouseMoveText(d){
+        console.log(d)
+        tooltip
+            .html(Number(d.value).toLocaleString() + " Doses")
+            .style("left", (d3.event.pageX) + "px")
+            .style("top", (d3.event.pageY - 25) + "px")
+    }
+
     function mouseLeave(d) {
         tooltip
             .transition()
@@ -1058,6 +1067,8 @@ function updateBar(data, total, state){
         .attr("y", function(d) { return y(d.value); })
         .attr("height", function(d) { return (height*0.8) - y(d.value); })
         .delay(function(d,i){return(i*100)})
+    
+    chartGroup.select('.x.axis').selectAll('text').data(data).transition().duration(500)
 
     var legend = svg.select("g#legend")
     
