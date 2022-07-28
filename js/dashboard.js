@@ -934,7 +934,6 @@ function createBar(data, total){
         .style("text-anchor", "middle")
         .style("font-size", "large")
         .on("mouseover", mouseOverText)
-        .on('mousemove',mouseMoveText)
         .on("mouseleave", mouseLeave);
     
     chartGroup.append("g")
@@ -1020,17 +1019,6 @@ function createBar(data, total){
             .transition()
             .duration(100)
             .style("opacity", 1);
-    }
-
-    function mouseMoveText(d){
-        temp = []
-        for (i in data){
-            if (data[i].name == d) temp = data[i].value;
-        }
-        tooltip
-            .html(Number(temp).toLocaleString() + " Doses")
-            .style("left", (d3.event.pageX) + "px")
-            .style("top", (d3.event.pageY - 25) + "px")
     }
 
     function mouseLeave(d) {
