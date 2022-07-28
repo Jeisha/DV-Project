@@ -5,7 +5,9 @@ var parseDate = d3.timeParse("%Y-%m");
 var formatDate = d3.timeFormat("%b %Y");
 var dates = []
 var datas = []
-const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#CDDC39', '#FFEB3C', '#FEC107', '#FE5721','red']
+// const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#CDDC39', '#FFEB3C', '#FEC107', '#FE5721','red']
+const colorRange = ["#440154","#481a6c","#472f7d","#414487","#39568c","#31688e","#2a788e","#23888e","#1f988b","#22a884","#35b779","#54c568","#7ad151","#a5db36","#a8db34","#d5e21a"]
+// const colorRange = d3.schemeBlues(13)
 const stateCode = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 const vacCode = ['Pfizer','Sinovac','AstraZeneca','Sinopharm','CanSino']
 const orititle = 'Insights';
@@ -926,7 +928,7 @@ function createBar(data, total){
     chartGroup.append("g")
         .attr("transform", "translate(20," + (height*0.8) + ")")
         .attr('class', 'x axis')
-        .call(d3.axisBottom(x))
+        .call(d3.axisBottom(x).ticks(7))
         .selectAll("text")
         .style("text-anchor", "middle")
         .style("font-size", "large")
@@ -1058,9 +1060,6 @@ function updateBar(data, total, state){
     
     
     let yAxis = d3.axisLeft(y).ticks(7);
-    let xAxis = d3.axisBottom(x).ticks(5);
-    
-    chartGroup.select('g.x.axis').call(xAxis);
     chartGroup.select('g.y.axis').call(yAxis);
     
     chartGroup.selectAll("rect")

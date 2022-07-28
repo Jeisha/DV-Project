@@ -723,7 +723,6 @@ function updateScatter(data, country, color){
             Vaccine:((Number(newd[i].Vaccine) - minmaxv[0])/(minmaxv[1]-minmaxv[0]))*100
         })
     }
-    console.log(dumd)
     
     var yDomain = d3.extent(dumd, function(d) { return +d.Vaccine});
     var y2Domain = d3.extent(dumd, function(d) { return +d.Death});
@@ -764,7 +763,6 @@ function updateScatter(data, country, color){
         .data(dumd)
         .transition()
         .duration(750)
-        .style("fill", color)
         .attr("cx", function(d) { return x(d.Date); })
         .attr("cy", function(d) { return y(+d.Vaccine); });
         
@@ -773,7 +771,6 @@ function updateScatter(data, country, color){
         .data(dumd)
         .transition()
         .duration(750)
-        .style("fill", color)
         .attr("cx", function(d) { return x(d.Date); })
         .attr("cy", function(d) { return y2(+d.Death); });
 }
