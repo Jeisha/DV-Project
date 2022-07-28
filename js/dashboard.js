@@ -5,6 +5,7 @@ var parseDate = d3.timeParse("%Y-%m");
 var formatDate = d3.timeFormat("%b %Y");
 var dates = []
 var datas = []
+// const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#2E1217', '#A1433A', '#2C4A2C', '#FE5721','red']
 const colorRange = ["#F44236", '#EA1E63', '#9C28B1', '#673AB7', '#009788', '#00BCD5', '#03A9F5', '#2196F3', '#3F51B5', '#4CB050', '#8BC24A', '#CDDC39', '#FFEB3C', '#FEC107', '#FE5721','red']
 // const colorRange = ["#440154","#481a6c","#472f7d","#414487","#39568c","#31688e","#2a788e","#23888e","#1f988b","#22a884","#35b779","#54c568","#7ad151","#a5db36","#a8db34","#d5e21a"]
 // const colorRange = d3.schemeBlues(13)
@@ -663,7 +664,7 @@ function updateScatter(data, country, color){
         tempCumVac  = tempCumVac + Number(data[i].Vaccine)
         scattterData.push({
             date:data[i].Date,
-            Death:tempCumDeath,
+            Death: Number(data[i].Death),
             Vaccine:tempCumVac
         })
     }
